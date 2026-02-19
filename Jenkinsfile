@@ -15,8 +15,9 @@ pipeline {
     agent any
 
     environment {
-        PYTHON = 'python'
-        PIP    = 'pip'
+        PYTHON_HOME = 'C:\\Users\\cruiz\\AppData\\Local\\Python\\pythoncore-3.14-64'
+        PYTHON      = "${PYTHON_HOME}\\python.exe"
+        PIP         = "${PYTHON_HOME}\\python.exe -m pip"
     }
 
     stages {
