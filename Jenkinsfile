@@ -14,12 +14,6 @@
 pipeline {
     agent any
 
-    environment {
-        PYTHON_HOME = 'C:\\Users\\cruiz\\AppData\\Local\\Python\\pythoncore-3.14-64'
-        PYTHON      = "${PYTHON_HOME}\\python.exe"
-        PIP         = "${PYTHON_HOME}\\python.exe -m pip"
-    }
-
     stages {
 
         stage('Checkout') {
@@ -32,21 +26,21 @@ pipeline {
         stage('Instalar Dependências') {
             steps {
                 echo '📦 Instalando dependências do projeto...'
-                bat "${PIP} install -r requirements.txt"
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
         stage('Testes Unitários') {
             steps {
                 echo '🧪 Executando testes unitários...'
-                bat "${PYTHON} -m pytest test_calculadora.py -v --tb=short"
+                bat 'python -m pytest test_calculadora.py -v --tb=short'
             }
         }
 
         stage('Build Executável') {
             steps {
                 echo '🔨 Gerando executável com PyInstaller...'
-                bat "${PYTHON} -m PyInstaller --onefile --windowed --name Calculadora --clean calculadora.py"
+                bat 'python -m PyInstaller --onefile --windowed --name Calculadora --clean calculadora.py'
             }
         }
 
